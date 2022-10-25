@@ -22,7 +22,7 @@ const userSchema = new Schema(
         },
         token: {
             type: String,
-            default: "",
+            default: null,
         },
     },
     { versionKey: false, timestamps: true }
@@ -33,7 +33,7 @@ userSchema.post("save", handleSaveErrors);
 const registerSchema = Joi.object({
     password: Joi.string().required(),
     email: Joi.string().pattern(emailRegexp).required(),
-    subscription: Joi.string(),
+    subscription: Joi.string().valid("starter", "pro", "business"),
 });
 
 const loginSchema = Joi.object({
